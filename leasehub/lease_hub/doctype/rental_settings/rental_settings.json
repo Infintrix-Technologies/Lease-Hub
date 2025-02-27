@@ -1,0 +1,111 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-02-26 17:49:37.362323",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "default_rental_mode",
+  "column_break_jqaz",
+  "minimum_rental_duration",
+  "maximum_rental_duration",
+  "daily_minimum_duration",
+  "daily_maximum_duration",
+  "weekly_minimum_duration",
+  "weekly_maximum_duration",
+  "monthly_minimum_duration",
+  "monthly_maximum_duration"
+ ],
+ "fields": [
+  {
+   "default": "1",
+   "fieldname": "minimum_rental_duration",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Hourly Minimum Duration "
+  },
+  {
+   "default": "24",
+   "fieldname": "maximum_rental_duration",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Hourly Maximum Duration"
+  },
+  {
+   "default": "1",
+   "fieldname": "daily_minimum_duration",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Daily Minimum Duration"
+  },
+  {
+   "default": "6",
+   "fieldname": "daily_maximum_duration",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Daily Maximum Duration"
+  },
+  {
+   "default": "1",
+   "fieldname": "weekly_minimum_duration",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Weekly Minimum Duration"
+  },
+  {
+   "default": "4",
+   "fieldname": "weekly_maximum_duration",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Weekly Maximum Duration"
+  },
+  {
+   "default": "1",
+   "fieldname": "monthly_minimum_duration",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Monthly Minimum Duration"
+  },
+  {
+   "default": "12",
+   "fieldname": "monthly_maximum_duration",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Monthly Maximum Duration"
+  },
+  {
+   "default": "Monthly",
+   "fieldname": "default_rental_mode",
+   "fieldtype": "Select",
+   "label": "Default Rental Mode",
+   "options": "Hourly\nDaily\nWeekly\nMonthly"
+  },
+  {
+   "fieldname": "column_break_jqaz",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2025-02-26 21:37:41.183009",
+ "modified_by": "Administrator",
+ "module": "Lease Hub",
+ "name": "Rental Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

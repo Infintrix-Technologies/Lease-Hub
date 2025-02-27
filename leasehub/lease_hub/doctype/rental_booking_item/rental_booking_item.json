@@ -1,0 +1,65 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-02-26 16:42:58.620223",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "item",
+  "rental_based_on",
+  "rental_start",
+  "rental_end",
+  "rental_cost",
+  "total_cost"
+ ],
+ "fields": [
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rental_start",
+   "fieldtype": "Datetime",
+   "label": "Rental Start"
+  },
+  {
+   "fieldname": "rental_end",
+   "fieldtype": "Datetime",
+   "label": "Rental End"
+  },
+  {
+   "default": "Hourly",
+   "fieldname": "rental_based_on",
+   "fieldtype": "Select",
+   "label": "Rental Based On",
+   "options": "Hourly\nDaily\nWeekly\nMonthly"
+  },
+  {
+   "fieldname": "rental_cost",
+   "fieldtype": "Currency",
+   "label": "Rental Cost"
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "label": "Total Cost"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-02-26 21:09:08.858434",
+ "modified_by": "Administrator",
+ "module": "Lease Hub",
+ "name": "Rental Booking Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

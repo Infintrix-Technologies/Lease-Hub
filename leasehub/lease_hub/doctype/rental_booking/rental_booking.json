@@ -1,0 +1,232 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:RB-{#####}",
+ "creation": "2025-02-26 16:32:06.863293",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "customer_details_section",
+  "customer",
+  "customer_name",
+  "column_break_lbsn",
+  "customer_mobile",
+  "booking_status",
+  "rental_period_section",
+  "rental_start",
+  "rental_end",
+  "sync_rental_period",
+  "column_break_oytl",
+  "rental_based_on",
+  "sync_rental_based_on",
+  "booking_items_section",
+  "rental_booking_item",
+  "pickup_details_section",
+  "rental_pick",
+  "column_break_uxib",
+  "address",
+  "accounting_tab",
+  "pricing_section_section",
+  "rental_cost",
+  "section_break_tczs",
+  "deposit_amount",
+  "column_break_bifv",
+  "deposit_paid",
+  "deposit_refunded",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer_details_section",
+   "fieldtype": "Section Break",
+   "label": "Customer Details"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_lbsn",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "+1-",
+   "fieldname": "customer_mobile",
+   "fieldtype": "Phone",
+   "label": "Customer Mobile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rental_period_section",
+   "fieldtype": "Section Break",
+   "label": "Rental Period"
+  },
+  {
+   "fieldname": "rental_start",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Rental Start",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rental_end",
+   "fieldtype": "Datetime",
+   "label": "Rental End",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "sync_rental_period",
+   "fieldtype": "Check",
+   "label": "Sync Rental Period"
+  },
+  {
+   "fieldname": "column_break_oytl",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Hourly",
+   "fieldname": "rental_based_on",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Rental Based On",
+   "options": "Hourly\nDaily\nWeekly\nMonthly",
+   "reqd": 1
+  },
+  {
+   "default": "1",
+   "fieldname": "sync_rental_based_on",
+   "fieldtype": "Check",
+   "label": "Sync Rental Based On"
+  },
+  {
+   "fieldname": "pricing_section_section",
+   "fieldtype": "Section Break",
+   "label": "Pricing Section"
+  },
+  {
+   "fieldname": "rental_cost",
+   "fieldtype": "Currency",
+   "label": "Rental Cost"
+  },
+  {
+   "fieldname": "booking_items_section",
+   "fieldtype": "Section Break",
+   "label": "Booking Items"
+  },
+  {
+   "fieldname": "rental_booking_item",
+   "fieldtype": "Table",
+   "label": "Rental Booking Item",
+   "options": "Rental Booking Item",
+   "reqd": 1
+  },
+  {
+   "default": "Pickup",
+   "fieldname": "rental_pick",
+   "fieldtype": "Select",
+   "label": "Rental Pick",
+   "options": "Deliver\nPickup"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "booking_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Booking Status",
+   "options": "Pending\nReserved\nActive\nCompleted",
+   "reqd": 1
+  },
+  {
+   "fieldname": "accounting_tab",
+   "fieldtype": "Tab Break",
+   "label": "Accounting"
+  },
+  {
+   "fieldname": "section_break_tczs",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "deposit_amount",
+   "fieldtype": "Currency",
+   "label": "Deposit Amount"
+  },
+  {
+   "fieldname": "column_break_bifv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "deposit_paid",
+   "fieldtype": "Check",
+   "label": "Deposit Paid",
+   "set_only_once": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "deposit_refunded",
+   "fieldtype": "Check",
+   "label": "Deposit Refunded"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Rental Booking",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "pickup_details_section",
+   "fieldtype": "Section Break",
+   "label": "Pickup Details"
+  },
+  {
+   "fieldname": "column_break_uxib",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-02-26 23:06:12.473601",
+ "modified_by": "Administrator",
+ "module": "Lease Hub",
+ "name": "Rental Booking",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
