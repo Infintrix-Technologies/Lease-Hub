@@ -1,0 +1,115 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:RI-{MM}-{###}",
+ "creation": "2025-02-27 20:37:59.388051",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "booking_details_section",
+  "rental_booking",
+  "booking_status",
+  "column_break_yebq",
+  "customer",
+  "section_break_agbn",
+  "rental_booking_item",
+  "deposits_section",
+  "deposit_history",
+  "rental_cost"
+ ],
+ "fields": [
+  {
+   "fieldname": "booking_details_section",
+   "fieldtype": "Section Break",
+   "label": "Booking Details"
+  },
+  {
+   "fieldname": "rental_booking",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Rental Booking",
+   "options": "Rental Booking",
+   "placeholder": "Not Selected",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "booking_status",
+   "fieldtype": "Select",
+   "label": "Booking Status",
+   "options": "\nClosed"
+  },
+  {
+   "fieldname": "column_break_yebq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Customer",
+   "options": "Customer",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_agbn",
+   "fieldtype": "Section Break",
+   "label": "Rental Booked Items"
+  },
+  {
+   "fieldname": "deposits_section",
+   "fieldtype": "Section Break",
+   "label": "Deposit Tracking"
+  },
+  {
+   "default": "0",
+   "fieldname": "rental_cost",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Rental Cost",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "deposit_history",
+   "fieldtype": "Table",
+   "label": "Deposit History",
+   "options": "Deposit Payment",
+   "read_only": 1
+  },
+  {
+   "default": "1\n",
+   "fieldname": "rental_booking_item",
+   "fieldtype": "Table",
+   "label": "Rental Booking Item",
+   "options": "Rental Booking Item",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-03-05 13:45:20.523711",
+ "modified_by": "Administrator",
+ "module": "Lease Hub",
+ "name": "Rental Item Return",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

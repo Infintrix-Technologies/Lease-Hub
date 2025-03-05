@@ -5,7 +5,7 @@
    "label": "Rental Bookings Chart"
   }
  ],
- "content": "[{\"id\":\"4PxCE_yqEu\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Rental</span>\",\"col\":12}},{\"id\":\"K3sVE8Be7m\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Today Rental Bookings\",\"col\":4}},{\"id\":\"skzymEWqyj\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Rental Bookings Chart\",\"col\":12}},{\"id\":\"OEL1fo-6Fz\",\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Master Data</span>\",\"col\":12}},{\"id\":\"HWsyTmQLl4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Rental Bookings\",\"col\":3}},{\"id\":\"G2UylT7yBr\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Rental Items\",\"col\":3}},{\"id\":\"j6J_ke9e8V\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Rental Contracts\",\"col\":3}},{\"id\":\"39vRPVIdMB\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"8cTF-CYZ3W\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Rental Reports</span>\",\"col\":12}}]",
+ "content": "[{\"id\":\"4PxCE_yqEu\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Rental</span>\",\"col\":12}},{\"id\":\"K3sVE8Be7m\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Today Rental Bookings\",\"col\":4}},{\"id\":\"W1_rH10Jnx\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Total Completed Bookings Today\",\"col\":4}},{\"id\":\"skzymEWqyj\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Rental Bookings Chart\",\"col\":12}},{\"id\":\"OEL1fo-6Fz\",\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Master Data</span>\",\"col\":12}},{\"id\":\"HWsyTmQLl4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Rental Bookings\",\"col\":3}},{\"id\":\"G2UylT7yBr\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Rental Items\",\"col\":3}},{\"id\":\"j6J_ke9e8V\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Rental Contracts\",\"col\":3}},{\"id\":\"pBT99cM28M\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Rental Item Return\",\"col\":3}},{\"id\":\"fz-ZYb3eMs\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Rental Requests\",\"col\":3}},{\"id\":\"39vRPVIdMB\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"_0H-rNYb6w\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"8cTF-CYZ3W\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Rental Reports</span>\",\"col\":12}}]",
  "creation": "2025-02-26 21:43:55.023521",
  "custom_blocks": [],
  "docstatus": 0,
@@ -18,11 +18,15 @@
  "is_hidden": 0,
  "label": "Rental",
  "links": [],
- "modified": "2025-02-27 15:57:22.724014",
+ "modified": "2025-03-05 14:03:52.504889",
  "modified_by": "Administrator",
  "module": "Lease Hub",
  "name": "Rental",
  "number_cards": [
+  {
+   "label": "Total Completed Bookings Today",
+   "number_card_name": "Total Rental Bookings Today"
+  },
   {
    "label": "Today Rental Bookings",
    "number_card_name": "Total Rental Bookings Today"
@@ -41,6 +45,22 @@
    "label": "Rental Bookings",
    "link_to": "Rental Booking",
    "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Rental Item Return",
+   "link_to": "Rental Item Return",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "New Rental Requests",
+   "link_to": "Rental Request",
+   "stats_filter": "[[\"Rental Request\",\"booking_status\",\"=\",\"pending\",false]]",
    "type": "DocType"
   },
   {

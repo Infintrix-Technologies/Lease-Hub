@@ -1,22 +1,30 @@
-frappe.ui.form.on("Rental Booking", {
+frappe.ui.form.on("Rental Request", {
     refresh(frm) {
         if (!frm.is_new()) {
-            frm.add_custom_button(__('See Contract'), function () {
-                frappe.set_route('List', 'Contract', { custom_rental_booking: frm.doc.name });
+            frm.add_custom_button(__('Make Booking'), function () {
+                handle_rental_booking(frm);
             });
-
-            frm.add_custom_button(__('Contract'), function () {
-                create_rental_contract(frm);
-            }, __('Create'));
-            if (frm.doc.remaining_amount == 0 && (frm.doc.booking_status == 'Active' || frm.doc.booking_status == 'Completed')) {
-                frm.add_custom_button(__('Return Item'), function () {
-                    create_return_item(frm);
-                }, __('Create'));
-            }
         }
-        update_booking_status(frm);
-        set_item_filters(frm);
+        if (frm.fields_dict["rental_booking_item"] && frm.fields_dict["rental_booking_item"].grid) {
+            setTimeout(() => {
+                frm.fields_dict["rental_booking_item"].grid.set_grid_columns([
+                    { fieldname: "item", width: 140 },
+                    { fieldname: "rental_based_on", width: 120 },
+                    { fieldname: "rental_start", width: 180 },
+                    { fieldname: "rental_end", width: 100 },
+                    { fieldname: "rental_cost", width: 130 },
+                    { fieldname: "total_cost", width: 130 }
+                ]);
+                frm.fields_dict["rental_booking_item"].grid.refresh();
+            }, 100);
+        }
     },
+    before_save: function (frm) {
+        if (!frm.doc.rental_start) {
+            frm.set_value('rental_start', frappe.datetime.now_datetime());
+        }
+    },
+
     customer: function (frm) {
         fetch_customer_details(frm, frm.doc.customer);
         set_car_filters(frm);
@@ -47,96 +55,76 @@ frappe.ui.form.on("Rental Booking", {
         calculate_total_cost(frm, cdt, cdn);
     }
 });
-// Update the status of the booking status when the rental_start time is equal to current Date Time
 
-function update_booking_status(frm) {
-    let current_datetime = frappe.datetime.now_datetime();
-    let should_be_active = (frm.doc.rental_booking_item || []).some(item => {
-        return item.rental_start && item.rental_start <= current_datetime && item.rental_end > current_datetime;
-    });
-    let should_be_completed = (frm.doc.rental_booking_item || []).every(item => {
-        return item.rental_end && item.rental_end <= current_datetime;
-    });
-    if (should_be_active && frm.doc.booking_status !== "Active") {
-        frm.set_value("booking_status", "Active");
-        frm.save_or_update();
-        update_rental_status(frm, "Rented");
-    } else if (should_be_completed && frm.doc.booking_status !== "Completed") {
-        frm.set_value("booking_status", "Completed");
-        frm.save_or_update();
-        update_rental_status(frm, "Available");
-    }
-}
+// For the Rental Request doctype, we will add a custom button to create a Rental Booking. When the button is clicked, we will check if the customer exists in the system. If the customer exists, we will proceed with creating a Rental Booking. If the customer doesn't exist, we will create a new Customer record and then create a Rental Booking.
 
-// Function to update rental_status of items in rental_booking_item table
-function update_rental_status(frm, status) {
-    (frm.doc.rental_booking_item || []).forEach(item => {
-        frappe.db.set_value('Item', item.item, 'custom_rental_status', status)
-            .then(() => {
-                frappe.msgprint(__('Item {0} status updated to {1}', [item.item, status]));
-            });
-    });
-}
-
-
-
-
-function fetch_customer_details(frm, customer_name) {
-    if (customer_name) {
-        frappe.call({
-            method: 'frappe.client.get',
-            args: {
-                doctype: 'Customer',
-                name: customer_name
+function handle_rental_booking(frm) {
+    frappe.call({
+        method: "frappe.client.get_list",
+        args: {
+            doctype: "Customer",
+            filters: {
+                mobile_no: frm.doc.customer_mobile,
+                email_id: frm.doc.customer_email
             },
-            callback: function (response) {
-                if (response.message) {
-                    frm.set_value('customer_name', response.message.customer_name);
-                    frm.set_value('customer_mobile', response.message.mobile_no);
-                }
+            fields: ["name"]
+        },
+        callback: function (res) {
+            if (res.message.length > 0) {
+                frm.set_value('booking_status', 'In Progress');
+                frm.save();
+                create_rental_booking(frm, res.message[0].name);
+            } else {
+                create_customer(frm);
             }
-        });
-    }
+        }
+    });
 }
 
-function create_rental_contract(frm) {
-    frappe.new_doc('Contract', {
-        custom_rental_booking: frm.doc.name,
-        party_type: 'Customer',
-        party_name: frm.doc.customer,
-        party_user: 'Guest',
-        start_date: frm.doc.rental_start,
-        end_date: frm.doc.rental_end,
+function create_customer(frm) {
+    frappe.call({
+        method: "frappe.client.insert",
+        args: {
+            doc: {
+                doctype: "Customer",
+                customer_name: frm.doc.customer_name,
+                mobile_no: frm.doc.customer_mobile, // Ensure correct field name
+                email_id: frm.doc.customer_email,
+                gender: frm.doc.gender,
+                customer_type: "Normal Customer"
+            }
+        },
+        callback: function (res) {
+            if (res.message) {
+                frappe.msgprint(__("Customer Created: " + res.message.name));
+                create_rental_booking(frm, res.message.name);
+            }
+        }
     });
 }
 
 
-// Create Return Item
-function create_return_item(frm) {
-    frappe.new_doc('Rental Item Return', {
-        rental_booking: frm.doc.name,
-        customer: frm.doc.customer,
+
+function create_rental_booking(frm, customer_name) {
+    frappe.new_doc('Rental Booking', {
+        customer: customer_name,
+        customer_name: customer_name,
+        customer_mobile: frm.doc.customer_mobile,
+        rental_start: frm.doc.rental_start,
+        rental_end: frm.doc.rental_end,
+        rental_based_on: frm.doc.rental_based_on,
         rental_booking_item: frm.doc.rental_booking_item.map(item => ({
             item: item.item,
+            rental_based_on: item.rental_based_on,
             rental_start: item.rental_start,
             rental_end: item.rental_end,
-            rental_based_on: item.rental_based_on,
             rental_cost: item.rental_cost,
-            total_cost: item.total_cost,
-        })),
-        deposit_history: frm.doc.deposit_history.map(deposit => ({
-            till_id: deposit.till_id,
-            date_time: deposit.date_time,
-            amount: deposit.amount,
-            channel: deposit.channel,
-            account_no: deposit.account_no
+            total_cost: item.total_cost
         })),
         rental_cost: frm.doc.rental_cost
+
     });
 }
-
-
-
 
 // Function to sync rental period to table items
 function sync_rental_period_to_items(frm) {
@@ -159,34 +147,20 @@ function sync_rental_based_on_to_items(frm) {
     }
 }
 
-// Item Filter in Rental Booking Item
-
-function set_item_filters(frm) {
-    frm.fields_dict["rental_booking_item"].grid.get_field("item").get_query = function () {
-        return {
-            filters: {
-                custom_rental_status: "Available",
-                name: ["not in", frm.doc.rental_booking_item.map(item => item.item)]
-            }
-        };
-    };
-}
-
 // Items Table in Rental Booking
 frappe.ui.form.on('Rental Booking Item', {
-    form_render: function (frm, cdt, cdn) {
-        set_item_filters(frm, cdt, cdn);
-    },
     item: function (frm, cdt, cdn) {
         let row = locals[cdt][cdn];
         if (row.item) {
             frappe.db.get_doc('Item', row.item).then(item => {
                 frappe.model.set_value(cdt, cdn, 'rental_based_on', item.rental_based_on);
                 // frappe.model.set_value(cdt, cdn, 'rental_rate', item.custom_hourly_rate);
+
                 frm.refresh_field('rental_booking_item');
                 sync_rental_based_on_to_items(frm);
             });
         }
+        set_item_conditions(frm);
     },
 
     rental_based_on: function (frm, cdt, cdn) {
@@ -230,6 +204,20 @@ frappe.ui.form.on('Rental Booking Item', {
 });
 
 
+function set_item_conditions(frm) {
+    frm.fields_dict['rental_booking_item'].grid.get_field('item').get_query = function () {
+        let selected_item = (frm.doc.rental_booking_item || []).map(row => row.item);
+        return {
+            filters: [
+                ['item_group', '=', 'Rentable'],
+                ['rental_status', '=', 'Available'],
+                ['name', 'not in', selected_item]
+            ]
+        };
+    };
+}
+
+
 // Function to calculate total cost based on rental duration
 function calculate_total_cost(frm, cdt, cdn) {
     let row = locals[cdt][cdn];
@@ -265,6 +253,7 @@ function calculate_total_cost(frm, cdt, cdn) {
 }
 
 
+
 function update_total_rental_cost(frm) {
     let total_rental_cost = 0;
 
@@ -273,35 +262,4 @@ function update_total_rental_cost(frm) {
     });
 
     frm.set_value('rental_cost', total_rental_cost.toFixed(2));
-    calculate_remaining_amount(frm);
-
-}
-
-
-
-// Deposit Table Script
-frappe.ui.form.on('Deposit Payment', {
-    amount: function (frm, cdt, cdn) {
-        calculate_deposit_total(frm);
-        calculate_remaining_amount(frm);
-    },
-    deposit_history_remove: function (frm, cdt, cdn) {
-        calculate_deposit_total(frm);
-        calculate_remaining_amount(frm);
-    }
-});
-
-function calculate_deposit_total(frm) {
-    let total = 0;
-
-    frm.doc.deposit_history.forEach(row => {
-        total += row.amount || 0;
-    });
-
-    frm.set_value('deposit_amount', total);
-}
-
-function calculate_remaining_amount(frm) {
-    let remaining_amount = frm.doc.rental_cost - frm.doc.deposit_amount;
-    frm.set_value('remaining_amount', remaining_amount.toFixed(2));
 }

@@ -1,0 +1,186 @@
+{
+ "actions": [],
+ "autoname": "format:REQ-{MM}-{###}",
+ "creation": "2025-02-27 23:01:07.246423",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "customer_details_section",
+  "customer_name",
+  "customer_email",
+  "column_break_umrf",
+  "customer_mobile",
+  "gender",
+  "booking_status_section",
+  "booking_status",
+  "rental_period_section",
+  "rental_based_on",
+  "sync_rental_based_on",
+  "column_break_udea",
+  "rental_start",
+  "rental_end",
+  "sync_rental_period",
+  "rental_booking_items_section",
+  "rental_booking_item",
+  "rental_cost",
+  "pickup_details_section",
+  "pick_type",
+  "column_break_gqyj",
+  "pickup_address"
+ ],
+ "fields": [
+  {
+   "fieldname": "customer_details_section",
+   "fieldtype": "Section Break",
+   "label": "Customer Details"
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Customer Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_umrf",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "booking_status",
+   "fieldtype": "Data",
+   "label": "Booking Status",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "rental_period_section",
+   "fieldtype": "Section Break",
+   "label": "Rental Period"
+  },
+  {
+   "default": "Hourly",
+   "fieldname": "rental_based_on",
+   "fieldtype": "Select",
+   "label": "Rental Based On ",
+   "options": "Hourly\nDaily\nWeekly\nMonthly"
+  },
+  {
+   "default": "1",
+   "fieldname": "sync_rental_based_on",
+   "fieldtype": "Check",
+   "label": "Sync Rental Based On"
+  },
+  {
+   "fieldname": "column_break_udea",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "rental_start",
+   "fieldtype": "Datetime",
+   "label": "Rental Start "
+  },
+  {
+   "fieldname": "rental_end",
+   "fieldtype": "Datetime",
+   "label": "Rental End"
+  },
+  {
+   "default": "1",
+   "fieldname": "sync_rental_period",
+   "fieldtype": "Check",
+   "label": "Sync Rental Period"
+  },
+  {
+   "fieldname": "rental_booking_items_section",
+   "fieldtype": "Section Break",
+   "label": "Rental Booking Items"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "pickup_details_section",
+   "fieldtype": "Section Break",
+   "label": "Pickup Details"
+  },
+  {
+   "default": "Pickup",
+   "fieldname": "pick_type",
+   "fieldtype": "Select",
+   "label": "Pick Type",
+   "options": "Delivery\nPickup"
+  },
+  {
+   "fieldname": "column_break_gqyj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pickup_address",
+   "fieldtype": "Small Text",
+   "label": "Pickup Address"
+  },
+  {
+   "fieldname": "rental_cost",
+   "fieldtype": "Currency",
+   "label": "Rental Cost",
+   "read_only": 1
+  },
+  {
+   "default": "+1-",
+   "fieldname": "customer_mobile",
+   "fieldtype": "Phone",
+   "in_list_view": 1,
+   "label": "Customer Mobile",
+   "reqd": 1
+  },
+  {
+   "fieldname": "rental_booking_item",
+   "fieldtype": "Table",
+   "label": "Rental Booking Item",
+   "options": "Rental Booking Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "gender",
+   "fieldtype": "Link",
+   "label": "Gender",
+   "options": "Gender"
+  },
+  {
+   "fieldname": "booking_status_section",
+   "fieldtype": "Section Break",
+   "label": "Booking Status"
+  },
+  {
+   "fieldname": "customer_email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Customer Email",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-03-04 13:02:32.015616",
+ "modified_by": "Administrator",
+ "module": "Lease Hub",
+ "name": "Rental Request",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -10,6 +10,7 @@
   "rental_based_on",
   "rental_start",
   "rental_end",
+  "column_break_tfoh",
   "rental_cost",
   "total_cost"
  ],
@@ -42,18 +43,24 @@
   {
    "fieldname": "rental_cost",
    "fieldtype": "Currency",
-   "label": "Rental Cost"
+   "label": "Rental Cost",
+   "read_only": 1
   },
   {
    "fieldname": "total_cost",
    "fieldtype": "Currency",
-   "label": "Total Cost"
+   "label": "Total Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_tfoh",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-02-26 21:09:08.858434",
+ "modified": "2025-03-04 11:47:09.075135",
  "modified_by": "Administrator",
  "module": "Lease Hub",
  "name": "Rental Booking Item",

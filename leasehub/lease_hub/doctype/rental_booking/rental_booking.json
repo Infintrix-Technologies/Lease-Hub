@@ -1,6 +1,5 @@
 {
  "actions": [],
- "allow_rename": 1,
  "autoname": "format:RB-{#####}",
  "creation": "2025-02-26 16:32:06.863293",
  "doctype": "DocType",
@@ -19,21 +18,23 @@
   "column_break_oytl",
   "rental_based_on",
   "sync_rental_based_on",
-  "booking_items_section",
+  "rental_items_section",
   "rental_booking_item",
   "pickup_details_section",
   "rental_pick",
   "column_break_uxib",
   "address",
   "accounting_tab",
-  "pricing_section_section",
-  "rental_cost",
+  "deposit_details_section",
+  "deposit_history",
   "section_break_tczs",
   "deposit_amount",
-  "column_break_bifv",
+  "rental_cost",
   "deposit_paid",
-  "deposit_refunded",
-  "amended_from"
+  "column_break_bifv",
+  "remaining_amount",
+  "amended_from",
+  "deposit_refunded"
  ],
  "fields": [
   {
@@ -110,26 +111,11 @@
    "label": "Sync Rental Based On"
   },
   {
-   "fieldname": "pricing_section_section",
-   "fieldtype": "Section Break",
-   "label": "Pricing Section"
-  },
-  {
+   "default": "0",
    "fieldname": "rental_cost",
    "fieldtype": "Currency",
-   "label": "Rental Cost"
-  },
-  {
-   "fieldname": "booking_items_section",
-   "fieldtype": "Section Break",
-   "label": "Booking Items"
-  },
-  {
-   "fieldname": "rental_booking_item",
-   "fieldtype": "Table",
-   "label": "Rental Booking Item",
-   "options": "Rental Booking Item",
-   "reqd": 1
+   "label": "Rental Cost",
+   "read_only": 1
   },
   {
    "default": "Pickup",
@@ -154,12 +140,15 @@
   },
   {
    "fieldname": "section_break_tczs",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Pricing"
   },
   {
+   "default": "0",
    "fieldname": "deposit_amount",
    "fieldtype": "Currency",
-   "label": "Deposit Amount"
+   "label": "Deposit Amount",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_bifv",
@@ -202,11 +191,41 @@
    "fieldname": "address",
    "fieldtype": "Small Text",
    "label": "Address"
+  },
+  {
+   "fieldname": "deposit_details_section",
+   "fieldtype": "Section Break",
+   "label": "Deposit Details"
+  },
+  {
+   "default": "0",
+   "fieldname": "remaining_amount",
+   "fieldtype": "Currency",
+   "label": "Remaining Amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rental_items_section",
+   "fieldtype": "Section Break",
+   "label": "Rental Items"
+  },
+  {
+   "fieldname": "rental_booking_item",
+   "fieldtype": "Table",
+   "label": "Rental Booking Item",
+   "options": "Rental Booking Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "deposit_history",
+   "fieldtype": "Table",
+   "label": "Deposit History",
+   "options": "Deposit Payment"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-26 23:06:12.473601",
+ "modified": "2025-03-04 15:38:27.979855",
  "modified_by": "Administrator",
  "module": "Lease Hub",
  "name": "Rental Booking",

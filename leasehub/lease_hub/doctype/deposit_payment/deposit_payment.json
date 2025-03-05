@@ -1,0 +1,64 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-02-27 20:12:12.762872",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "till_id",
+  "channel",
+  "date_time",
+  "amount",
+  "account_no"
+ ],
+ "fields": [
+  {
+   "fieldname": "account_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Account No."
+  },
+  {
+   "fieldname": "channel",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Channel",
+   "options": "JazzCash\nEasyPaisa\nNayaPay\nSadaPay\nHBL\nMeezan",
+   "reqd": 1
+  },
+  {
+   "fieldname": "till_id",
+   "fieldtype": "Data",
+   "label": "Till ID",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Date / Time",
+   "options": "now()",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Amount",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-03-05 12:51:03.154191",
+ "modified_by": "Administrator",
+ "module": "Lease Hub",
+ "name": "Deposit Payment",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

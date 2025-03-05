@@ -138,11 +138,11 @@ app_license = "agpl-3.0"
 # Hook on document methods and events
 
 # doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
+# "*": {
+# 	"on_update": "method",
+# 	"on_cancel": "method",
+# 	"on_trash": "method"
+# }
 # }
 
 # Scheduled Tasks
@@ -165,6 +165,7 @@ app_license = "agpl-3.0"
 # 		"leasehub.tasks.monthly"
 # 	],
 # }
+
 
 # Testing
 # -------
@@ -245,6 +246,6 @@ app_license = "agpl-3.0"
 fixtures = [
     {
         "dt": "Custom Field",
-        "filters":  [["module", "=", "Rental Management"]]
+        "filters":  [["module", "=", "Lease Hub"]]
     }
 ]
